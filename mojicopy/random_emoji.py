@@ -66,7 +66,7 @@ def _correct_emoji_range(emoji_ranges, weight_distr, point):
 
 def _index_in_range(weight_distr, point, emoji_range_idx):
     point_in_range = point
-    if emoji_range_idx is not 0:
+    if emoji_range_idx != 0:
         point_in_range = point - weight_distr[emoji_range_idx - 1]
     return point_in_range
 
