@@ -61,6 +61,12 @@ def _single_point(weight_distr):
     return randrange(weight_distr[-1])
 
 
+def _correct_emoji_range(emoji_ranges, weight_distr, point):
+    emoji_range_idx = bisect(weight_distr, point)
+    emoji_range = emoji_ranges[emoji_range_idx]
+    return emoji_range_idx, emoji_range
+
+
 def random_emoji(unicode_version=_DEFAULT_UNICODE_VERSION):
     if unicode_version in _EMOJI_RANGES_UNICODE:
         emoji_ranges = _EMOJI_RANGES_UNICODE[unicode_version]
@@ -71,9 +77,9 @@ def random_emoji(unicode_version=_DEFAULT_UNICODE_VERSION):
 
     point = _single_point(weight_distr)
 
-    # Select the correct range
-    emoji_range_idx = bisect(weight_distr, point)
-    emoji_range = emoji_ranges[emoji_range_idx]
+    emoji_range_idx, emoji_range = _correct_emoji_range(
+        emoji_ranges, weight_distr, point
+    )
 
     # Calculate the index in the selected range
     point_in_range = point
