@@ -57,6 +57,10 @@ def _weighted_distribution(emoji_ranges):
     return weight_distr
 
 
+def _single_point(weight_distr):
+    return randrange(weight_distr[-1])
+
+
 def random_emoji(unicode_version=_DEFAULT_UNICODE_VERSION):
     if unicode_version in _EMOJI_RANGES_UNICODE:
         emoji_ranges = _EMOJI_RANGES_UNICODE[unicode_version]
@@ -65,8 +69,7 @@ def random_emoji(unicode_version=_DEFAULT_UNICODE_VERSION):
 
     weight_distr = _weighted_distribution(emoji_ranges)
 
-    # Get one point in the multiple ranges
-    point = randrange(weight_distr[-1])
+    point = _single_point(weight_distr)
 
     # Select the correct range
     emoji_range_idx = bisect(weight_distr, point)
