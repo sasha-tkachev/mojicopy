@@ -9,10 +9,10 @@ from unicodedata import name as unicode_name
 
 # Set the unicode version.
 # Your system may not support Unicode 7.0 charecters just yet! So hipster.
-UNICODE_VERSION = 6
+_DEFAULT_UNICODE_VERSION = 6
 
 # Sauce: http://www.unicode.org/charts/PDF/U1F300.pdf
-EMOJI_RANGES_UNICODE = {
+_EMOJI_RANGES_UNICODE = {
     6: [
         ("\U0001F300", "\U0001F320"),
         ("\U0001F330", "\U0001F335"),
@@ -48,14 +48,14 @@ EMOJI_RANGES_UNICODE = {
     ],
 }
 
-NO_NAME_ERROR = "(No name found for this codepoint)"
+_NO_NAME_ERROR = "(No name found for this codepoint)"
 
 
-def random_emoji(unicode_version=6):
-    if unicode_version in EMOJI_RANGES_UNICODE:
-        emoji_ranges = EMOJI_RANGES_UNICODE[unicode_version]
+def random_emoji(unicode_version=_DEFAULT_UNICODE_VERSION):
+    if unicode_version in _EMOJI_RANGES_UNICODE:
+        emoji_ranges = _EMOJI_RANGES_UNICODE[unicode_version]
     else:
-        emoji_ranges = EMOJI_RANGES_UNICODE[-1]
+        emoji_ranges = _EMOJI_RANGES_UNICODE[-1]
 
     # Weighted distribution
     count = [ord(r[-1]) - ord(r[0]) + 1 for r in emoji_ranges]
@@ -75,7 +75,7 @@ def random_emoji(unicode_version=6):
 
     # Emoji 😄
     emoji = chr(ord(emoji_range[0]) + point_in_range)
-    emoji_name = unicode_name(emoji, NO_NAME_ERROR).capitalize()
+    emoji_name = unicode_name(emoji, _NO_NAME_ERROR).capitalize()
     emoji_codepoint = "U+{}".format(hex(ord(emoji))[2:].upper())
 
     return (emoji, emoji_codepoint, emoji_name)
