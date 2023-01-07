@@ -16,7 +16,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 if __name__ == "__main__":
     setuptools.setup(
-        name="emoget",
+        name="mojicopy",
         version="1.0.0",
         author="Alexander Tkachev",
         author_email="sasha64sasha@gmail.com",
