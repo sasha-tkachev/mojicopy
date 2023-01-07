@@ -51,15 +51,19 @@ _EMOJI_RANGES_UNICODE = {
 _NO_NAME_ERROR = "(No name found for this codepoint)"
 
 
+def _weighted_distribution(emoji_ranges):
+    count = [ord(r[-1]) - ord(r[0]) + 1 for r in emoji_ranges]
+    weight_distr = list(accumulate(count))
+    return weight_distr
+
+
 def random_emoji(unicode_version=_DEFAULT_UNICODE_VERSION):
     if unicode_version in _EMOJI_RANGES_UNICODE:
         emoji_ranges = _EMOJI_RANGES_UNICODE[unicode_version]
     else:
         emoji_ranges = _EMOJI_RANGES_UNICODE[-1]
 
-    # Weighted distribution
-    count = [ord(r[-1]) - ord(r[0]) + 1 for r in emoji_ranges]
-    weight_distr = list(accumulate(count))
+    weight_distr = _weighted_distribution(emoji_ranges)
 
     # Get one point in the multiple ranges
     point = randrange(weight_distr[-1])
