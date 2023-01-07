@@ -5,7 +5,6 @@ Based on https://gist.github.com/shello/efa2655e8a7bce52f273
 from bisect import bisect
 from itertools import accumulate
 from random import randrange
-from unicodedata import name as unicode_name
 
 # Set the unicode version.
 # Your system may not support Unicode 7.0 charecters just yet! So hipster.
@@ -48,8 +47,6 @@ _EMOJI_RANGES_UNICODE = {
     ],
 }
 
-_NO_NAME_ERROR = "(No name found for this codepoint)"
-
 
 def _weighted_distribution(emoji_ranges):
     count = [ord(r[-1]) - ord(r[0]) + 1 for r in emoji_ranges]
@@ -78,14 +75,6 @@ def _emoji_character(emoji_range, point_in_range):
     return chr(ord(emoji_range[0]) + point_in_range)
 
 
-def _emoji_name(emoji):
-    return unicode_name(emoji, _NO_NAME_ERROR).capitalize()
-
-
-def _emoji_codepoint(emoji):
-    return "U+{}".format(hex(ord(emoji))[2:].upper())
-
-
 def random_emoji(unicode_version=_DEFAULT_UNICODE_VERSION):
     if unicode_version in _EMOJI_RANGES_UNICODE:
         emoji_ranges = _EMOJI_RANGES_UNICODE[unicode_version]
@@ -100,12 +89,6 @@ def random_emoji(unicode_version=_DEFAULT_UNICODE_VERSION):
         emoji_ranges, weight_distr, point
     )
 
-    # Calculate the index in the selected range
     point_in_range = _index_in_range(weight_distr, point, emoji_range_idx)
 
-    # Emoji 😄
-    emoji = _emoji_character(emoji_range, point_in_range)
-    emoji_name = _emoji_name(emoji)
-    emoji_codepoint = _emoji_codepoint(emoji)
-
-    return (emoji, emoji_codepoint, emoji_name)
+    return _emoji_character(emoji_range, point_in_range)
