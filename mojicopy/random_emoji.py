@@ -82,6 +82,10 @@ def _emoji_name(emoji):
     return unicode_name(emoji, _NO_NAME_ERROR).capitalize()
 
 
+def _emoji_codepoint(emoji):
+    return "U+{}".format(hex(ord(emoji))[2:].upper())
+
+
 def random_emoji(unicode_version=_DEFAULT_UNICODE_VERSION):
     if unicode_version in _EMOJI_RANGES_UNICODE:
         emoji_ranges = _EMOJI_RANGES_UNICODE[unicode_version]
@@ -102,6 +106,6 @@ def random_emoji(unicode_version=_DEFAULT_UNICODE_VERSION):
     # Emoji 😄
     emoji = _emoji_character(emoji_range, point_in_range)
     emoji_name = _emoji_name(emoji)
-    emoji_codepoint = "U+{}".format(hex(ord(emoji))[2:].upper())
+    emoji_codepoint = _emoji_codepoint(emoji)
 
     return (emoji, emoji_codepoint, emoji_name)
