@@ -67,6 +67,13 @@ def _correct_emoji_range(emoji_ranges, weight_distr, point):
     return emoji_range_idx, emoji_range
 
 
+def _index_in_range(weight_distr, point, emoji_range_idx):
+    point_in_range = point
+    if emoji_range_idx is not 0:
+        point_in_range = point - weight_distr[emoji_range_idx - 1]
+    return point_in_range
+
+
 def random_emoji(unicode_version=_DEFAULT_UNICODE_VERSION):
     if unicode_version in _EMOJI_RANGES_UNICODE:
         emoji_ranges = _EMOJI_RANGES_UNICODE[unicode_version]
@@ -82,9 +89,7 @@ def random_emoji(unicode_version=_DEFAULT_UNICODE_VERSION):
     )
 
     # Calculate the index in the selected range
-    point_in_range = point
-    if emoji_range_idx is not 0:
-        point_in_range = point - weight_distr[emoji_range_idx - 1]
+    point_in_range = _index_in_range(weight_distr, point, emoji_range_idx)
 
     # Emoji 😄
     emoji = chr(ord(emoji_range[0]) + point_in_range)
