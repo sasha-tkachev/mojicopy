@@ -23,7 +23,6 @@ if __name__ == "__main__":
         description="Tool to generate emojis from text prompts stored in the clipboard using OpenAI.",
         long_description_content_type="text/markdown",
         long_description=long_description,
-        home_page="https://mojicopy.com",
         url="https://mojicopy.com",
         keywords=["emoji", "clipboard", "openai", "ChatGPT"],
         packages=setuptools.find_packages(),
