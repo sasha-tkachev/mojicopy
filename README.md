@@ -4,7 +4,7 @@ Tool to generate emojis from text prompts stored in the clipboard using OpenAI.
 
 ## 🔨 Installation
 
-First you need to install the emoget python package
+Install the mojicopy package using pip
 
 ```shell
 pip install mojicopy
