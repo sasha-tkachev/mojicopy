@@ -6,46 +6,7 @@ from bisect import bisect
 from itertools import accumulate
 from random import randrange
 
-# Set the unicode version.
-# Your system may not support Unicode 7.0 charecters just yet! So hipster.
-_DEFAULT_UNICODE_VERSION = 6
-
-# Sauce: http://www.unicode.org/charts/PDF/U1F300.pdf
-_EMOJI_RANGES_UNICODE = {
-    6: [
-        ("\U0001F300", "\U0001F320"),
-        ("\U0001F330", "\U0001F335"),
-        ("\U0001F337", "\U0001F37C"),
-        ("\U0001F380", "\U0001F393"),
-        ("\U0001F3A0", "\U0001F3C4"),
-        ("\U0001F3C6", "\U0001F3CA"),
-        ("\U0001F3E0", "\U0001F3F0"),
-        ("\U0001F400", "\U0001F43E"),
-        ("\U0001F440",),
-        ("\U0001F442", "\U0001F4F7"),
-        ("\U0001F4F9", "\U0001F4FC"),
-        ("\U0001F500", "\U0001F53C"),
-        ("\U0001F540", "\U0001F543"),
-        ("\U0001F550", "\U0001F567"),
-        ("\U0001F5FB", "\U0001F5FF"),
-    ],
-    7: [
-        ("\U0001F300", "\U0001F32C"),
-        ("\U0001F330", "\U0001F37D"),
-        ("\U0001F380", "\U0001F3CE"),
-        ("\U0001F3D4", "\U0001F3F7"),
-        ("\U0001F400", "\U0001F4FE"),
-        ("\U0001F500", "\U0001F54A"),
-        ("\U0001F550", "\U0001F579"),
-        ("\U0001F57B", "\U0001F5A3"),
-        ("\U0001F5A5", "\U0001F5FF"),
-    ],
-    8: [
-        ("\U0001F300", "\U0001F579"),
-        ("\U0001F57B", "\U0001F5A3"),
-        ("\U0001F5A5", "\U0001F5FF"),
-    ],
-}
+from mojicopy.emoji_unicode import DEFAULT_UNICODE_VERSION, EMOJI_RANGES_UNICODE
 
 
 def _weighted_distribution(emoji_ranges):
@@ -75,11 +36,11 @@ def _emoji_character(emoji_range, point_in_range):
     return chr(ord(emoji_range[0]) + point_in_range)
 
 
-def random_emoji(unicode_version=_DEFAULT_UNICODE_VERSION):
-    if unicode_version in _EMOJI_RANGES_UNICODE:
-        emoji_ranges = _EMOJI_RANGES_UNICODE[unicode_version]
+def random_emoji(unicode_version=DEFAULT_UNICODE_VERSION):
+    if unicode_version in EMOJI_RANGES_UNICODE:
+        emoji_ranges = EMOJI_RANGES_UNICODE[unicode_version]
     else:
-        emoji_ranges = _EMOJI_RANGES_UNICODE[-1]
+        emoji_ranges = EMOJI_RANGES_UNICODE[-1]
 
     weight_distr = _weighted_distribution(emoji_ranges)
 
