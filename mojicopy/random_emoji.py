@@ -6,7 +6,8 @@ from bisect import bisect
 from itertools import accumulate
 from random import randrange
 
-from mojicopy.emoji_unicode import DEFAULT_UNICODE_VERSION, EMOJI_RANGES_UNICODE
+from mojicopy.emoji_unicode import EMOJI_RANGES_UNICODE
+from mojicopy.settings import RandomEmojiSettings
 
 
 def _weighted_distribution(emoji_ranges):
@@ -36,8 +37,8 @@ def _emoji_character(emoji_range, point_in_range):
     return chr(ord(emoji_range[0]) + point_in_range)
 
 
-def random_emoji(unicode_version=DEFAULT_UNICODE_VERSION):
-    emoji_ranges = EMOJI_RANGES_UNICODE[unicode_version]
+def random_emoji(settings: RandomEmojiSettings):
+    emoji_ranges = EMOJI_RANGES_UNICODE[settings.unicode_version]
 
     weight_distr = _weighted_distribution(emoji_ranges)
 

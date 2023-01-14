@@ -16,9 +16,16 @@ class OpenAiSettings(BaseSettings):
     max_tokens: int = 100
 
 
+class RandomEmojiSettings(BaseSettings):
+    unicode_version: int = 6
+
+
 class Settings(BaseSettings):
     openai: OpenAiSettings = Field(
         title="OpenAI Settings", default_factory=OpenAiSettings
+    )
+    random: RandomEmojiSettings = Field(
+        title="Random Emoji Settings", default_factory=RandomEmojiSettings
     )
 
 

@@ -22,13 +22,13 @@ def _select_emoji(
     random: bool, settings: Settings, prompt: Optional[str] = None
 ) -> str:
     if random:
-        return random_emoji()
+        return random_emoji(settings.random)
     else:
         if prompt is None:
             prompt = _query_prompt()
         if prompt:
             return ai_emoji(prompt, settings.openai)
-        return random_emoji()
+        return random_emoji(settings.random)
 
 
 def _output_emoji(emoji: str) -> None:

@@ -1,7 +1,3 @@
-# Set the unicode version.
-# Your system may not support Unicode 7.0
-DEFAULT_UNICODE_VERSION = 6
-
 # Sauce: http://www.unicode.org/charts/PDF/U1F300.pdf
 EMOJI_RANGES_UNICODE = {
     6: [
