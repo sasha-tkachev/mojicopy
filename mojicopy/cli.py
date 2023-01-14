@@ -1,3 +1,5 @@
+from typing import Optional
+
 import openai
 import typer
 import xerox
@@ -9,11 +11,21 @@ from mojicopy.settings import API_KEY_DOCS_URL, Settings, persist_settings
 app = typer.Typer()
 
 
+def _query_prompt() -> Optional[str]:
+    try:
+        return xerox.paste()
+    except TypeError:
+        return None
+
+
 def _select_emoji(random: bool, settings: Settings) -> str:
     if random:
         return random_emoji()
     else:
-        return ai_emoji(xerox.paste(), settings.openai)
+        prompt = _query_prompt()
+        if prompt:
+            return ai_emoji(xerox.paste(), settings.openai)
+        return random_emoji()
 
 
 @app.command()
