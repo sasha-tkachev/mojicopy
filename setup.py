@@ -17,7 +17,7 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 if __name__ == "__main__":
     setuptools.setup(
         name="mojicopy",
-        version="1.0.0",
+        version="1.1.0",
         author="Alexander Tkachev",
         author_email="sasha64sasha@gmail.com",
         description="Tool to generate emojis from text prompts stored in the clipboard using OpenAI.",
