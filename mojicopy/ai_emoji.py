@@ -7,7 +7,7 @@ def ai_emoji(prompt: str, settings: OpenAiSettings) -> str:
     print("Here")
     response = openai.Completion.create(
         model=settings.model,
-        prompt=f"""What are single emojis describes best the title "{prompt}"?""",
+        prompt=f"""Give me a single emoji that describes "{prompt}"?""",
         max_tokens=settings.max_tokens,
     )
     print("got response")
