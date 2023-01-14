@@ -37,10 +37,7 @@ def _emoji_character(emoji_range, point_in_range):
 
 
 def random_emoji(unicode_version=DEFAULT_UNICODE_VERSION):
-    if unicode_version in EMOJI_RANGES_UNICODE:
-        emoji_ranges = EMOJI_RANGES_UNICODE[unicode_version]
-    else:
-        emoji_ranges = EMOJI_RANGES_UNICODE[-1]
+    emoji_ranges = EMOJI_RANGES_UNICODE[unicode_version]
 
     weight_distr = _weighted_distribution(emoji_ranges)
 
