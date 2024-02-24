@@ -31,7 +31,7 @@ mojicopy --prompt "OpenAI API Key"
 Get a random emoji into your clipboard
 
 ```shell
-mojicopy --ramdom
+mojicopy --random
 ```
 
 ### VSCode Integration
