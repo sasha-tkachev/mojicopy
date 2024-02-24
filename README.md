@@ -33,11 +33,3 @@ Get a random emoji into your clipboard
 ```shell
 mojicopy --random
 ```
-
-### VSCode Integration
-
-TBD
-
-### IntelliJ Integration
-
-TBD
